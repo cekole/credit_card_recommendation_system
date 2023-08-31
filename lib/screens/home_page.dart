@@ -1,4 +1,7 @@
 import 'package:credit_card_recommendation_system/constants/colors.dart';
+import 'package:credit_card_recommendation_system/constants/image_paths.dart';
+import 'package:credit_card_recommendation_system/screens/form_page.dart';
+import 'package:credit_card_recommendation_system/screens/offers_page.dart';
 import 'package:credit_card_recommendation_system/widgets/custom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +23,7 @@ class HomePage extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              foregroundColor: kPrimaryColor,
+              scrolledUnderElevation: 0,
               leading: IconButton(
                 onPressed: () {
                   Scaffold.of(context).openDrawer();
@@ -32,7 +33,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               title: Image.asset(
-                'assets/images/logo.png',
+                logoPath,
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
@@ -45,7 +46,7 @@ class HomePage extends StatelessWidget {
                       //modalBottomSheet
                     },
                     child: Image.asset(
-                      'assets/images/gift.png',
+                      giftPath,
                       height: 22,
                     ),
                   ),
@@ -85,8 +86,26 @@ class HomePage extends StatelessWidget {
                             height: 16.0,
                           ),
                           ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  transitionDuration:
+                                      const Duration(milliseconds: 250),
+                                  pageBuilder: (context, _, __) =>
+                                      const FormPage(),
+                                  transitionsBuilder:
+                                      (context, animation, _, child) {
+                                    return FadeTransition(
+                                      opacity: animation,
+                                      child: child,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
                             leading: Icon(
-                              Icons.credit_card_outlined,
+                              Icons.settings_outlined,
                             ),
                             title: Text(
                               'Tercihlerini Güncelle',
@@ -129,6 +148,24 @@ class HomePage extends StatelessWidget {
                             height: 16.0,
                           ),
                           ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  transitionDuration:
+                                      const Duration(milliseconds: 250),
+                                  pageBuilder: (context, _, __) =>
+                                      const OffersPage(),
+                                  transitionsBuilder:
+                                      (context, animation, _, child) {
+                                    return FadeTransition(
+                                      opacity: animation,
+                                      child: child,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
                             leading: Icon(
                               Icons.credit_card_outlined,
                             ),
