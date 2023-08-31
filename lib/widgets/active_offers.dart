@@ -1,4 +1,5 @@
 import 'package:credit_card_recommendation_system/constants/colors.dart';
+import 'package:credit_card_recommendation_system/models/card_offers.dart';
 import 'package:flutter/material.dart';
 
 class ActiveOffers extends StatelessWidget {
@@ -7,7 +8,7 @@ class ActiveOffers extends StatelessWidget {
     required this.activeOffers,
   });
 
-  final List activeOffers;
+  final List<CardOffer> activeOffers;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class ActiveOffers extends StatelessWidget {
                         Expanded(
                           flex: 2,
                           child: Image.network(
-                            activeOffers[index]['img_url'],
+                            activeOffers[index].imgUrl,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -59,7 +60,7 @@ class ActiveOffers extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              activeOffers[index]['card_name'],
+                              activeOffers[index].cardName,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleLarge!

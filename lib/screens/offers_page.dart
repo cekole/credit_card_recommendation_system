@@ -34,7 +34,8 @@ class OffersPage extends StatelessWidget {
         body: SafeArea(
           child: Consumer<QuestionsProvider>(
             builder: (context, questionsData, child) {
-              if (questionsData.cardOffers.isEmpty) {
+              if (questionsData.sponsoredOffers.isEmpty &&
+                  questionsData.activeOffers.isEmpty) {
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -67,25 +68,30 @@ class OffersPage extends StatelessWidget {
                   ),
                 );
               }
-              final List sponsoredOffers =
-                  questionsData.cardOffers['sponsored_offers'];
-              final List activeOffers =
-                  questionsData.cardOffers['active_offers'];
-              return ListView(
-                children: [
-                  //sponsored offers and active offers section
-                  //sponsored offers
-                  const SizedBox(
-                    height: 20,
+              final sponsoredOffers = questionsData.sponsoredOffers;
+              final activeOffers = questionsData.activeOffers;
+              return Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
-                  SponsoredOffers(sponsoredOffers: sponsoredOffers),
-                  //active offers
-                  const SizedBox(
-                    height: 20,
-                  ),
+                ),
+                child: ListView(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SponsoredOffers(sponsoredOffers: sponsoredOffers),
+                    //active offers
+                    const SizedBox(
+                      height: 20,
+                    ),
 
-                  ActiveOffers(activeOffers: activeOffers),
-                ],
+                    ActiveOffers(activeOffers: activeOffers),
+                  ],
+                ),
               );
             },
           ),

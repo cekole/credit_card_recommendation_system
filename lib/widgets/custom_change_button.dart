@@ -1,5 +1,6 @@
 import 'package:credit_card_recommendation_system/constants/colors.dart';
 import 'package:credit_card_recommendation_system/models/question.dart';
+import 'package:credit_card_recommendation_system/screens/home_page.dart';
 import 'package:credit_card_recommendation_system/screens/offers_page.dart';
 import 'package:credit_card_recommendation_system/utils/providers/carousel_provider.dart';
 import 'package:credit_card_recommendation_system/utils/providers/questions_provider.dart';
@@ -35,6 +36,7 @@ class CustomChangeButton extends StatelessWidget {
               if (value) {
                 showDialog(
                   context: context,
+                  barrierDismissible: false,
                   builder: (context) {
                     return AlertDialog(
                       titleTextStyle: Theme.of(context).textTheme.titleLarge,
@@ -43,7 +45,11 @@ class CustomChangeButton extends StatelessWidget {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pushReplacementNamed('/home');
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
+                                (route) => false);
                           },
                           child: const Text('Ana Sayfaya Dön'),
                         ),
@@ -73,26 +79,26 @@ class CustomChangeButton extends StatelessWidget {
                   },
                 );
               } else {
-                //error dialog
                 showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: const Text('Error'),
-                      content: const Text('Something went wrong'),
+                      titleTextStyle: Theme.of(context).textTheme.titleLarge,
+                      title: const Text('Hata'),
+                      content: const Text(
+                          'Gönderilirken Bir Hata Oluştu, Lütfen Tekrar Deneyin'),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text('OK'),
+                          child: const Text('Tamam'),
                         ),
                       ],
                     );
                   },
                 );
               }
-              //success dialog
             });
           } else {
             carouselData.nextPage();
