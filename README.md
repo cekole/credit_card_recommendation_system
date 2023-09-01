@@ -1,6 +1,7 @@
 # credit_card_recommendation_system
 
-A new Flutter project.
+## Description
+Flutter application that recommends credit cards based on user's income, spending habits and more parameters.
 
 ## Getting Started
 
