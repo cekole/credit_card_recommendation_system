@@ -10,6 +10,7 @@ final initial_questions = [
       '36-45',
       '45 Üstü',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 2,
@@ -20,6 +21,7 @@ final initial_questions = [
       'Orta',
       'Yüksek',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 3,
@@ -29,8 +31,11 @@ final initial_questions = [
       '0-1000 TL',
       '1000-5000 TL',
       '5000-15000 TL',
-      '15000 TL Üstü',
+      '15000-30000 TL',
+      '30000-50000 TL',
+      '50000 TL Üstü',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 4,
@@ -39,8 +44,11 @@ final initial_questions = [
       '0-1000 TL',
       '1000-5000 TL',
       '5000-15000 TL',
-      '15000 TL Üstü',
+      '15000-30000 TL',
+      '30000-50000 TL',
+      '50000 TL Üstü',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 5,
@@ -51,6 +59,7 @@ final initial_questions = [
       'Sık Sık',
       'Her Zaman',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 6,
@@ -60,6 +69,7 @@ final initial_questions = [
       'Biraz Önemli',
       'Çok Önemli',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 7,
@@ -69,8 +79,11 @@ final initial_questions = [
       '0-1000 TL',
       '1000-5000 TL',
       '5000-15000 TL',
-      '15000 TL Üstü',
+      '15000-30000 TL',
+      '30000-50000 TL',
+      '50000 TL Üstü',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 8,
@@ -80,8 +93,11 @@ final initial_questions = [
       '0-1000 TL',
       '1000-5000 TL',
       '5000-15000 TL',
-      '15000 TL Üstü',
+      '15000-30000 TL',
+      '30000-50000 TL',
+      '50000 TL Üstü',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 9,
@@ -91,6 +107,7 @@ final initial_questions = [
       'Nakit Para İadesi ve İndirimler',
       'Seyahat Avantajları',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 10,
@@ -100,7 +117,9 @@ final initial_questions = [
       'Faiz Oranı',
       'Kredi Limiti',
       'Kartın Markası',
+      'Diğer',
     ],
+    selectedAnswerIndex: -1,
   ),
   Question(
     id: 11,
@@ -109,7 +128,10 @@ final initial_questions = [
       '0-1000 TL',
       '1000-5000 TL',
       '5000-15000 TL',
-      '15000 TL Üstü',
+      '15000-30000 TL',
+      '30000-50000 TL',
+      '50000 TL Üstü',
     ],
+    selectedAnswerIndex: -1,
   ),
 ];

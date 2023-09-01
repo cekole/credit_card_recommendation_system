@@ -9,9 +9,7 @@ import 'package:http/http.dart' as http;
 
 class QuestionsProvider with ChangeNotifier {
   final _questions = initial_questions;
-
   List<CardOffer> _sponsoredOffers = [];
-
   List<CardOffer> _activeOffers = [];
 
   List<Question> get questions {
@@ -26,7 +24,66 @@ class QuestionsProvider with ChangeNotifier {
     return [..._activeOffers];
   }
 
-  Future<bool> submitAnswers(Map<String, dynamic> data) async {
+  void updateSelectedAnswer(int questionIndex, int answerIndex) {
+    _questions[questionIndex].selectedAnswerIndex = answerIndex;
+    notifyListeners();
+  }
+
+  Map<String, dynamic> get requestParams {
+    final initialFibonacci = [
+      1,
+      1,
+      2,
+      3,
+      5,
+      8,
+      13,
+      21,
+      34,
+    ];
+    final coefficients = <int, int>{};
+
+    for (int i = 0; i < _questions.length; i++) {
+      final question = _questions[i];
+      final selectedAnswerIndex = question.selectedAnswerIndex;
+      final answerLength = question.answers.length;
+
+      if (selectedAnswerIndex != null) {
+        final reversedFibonacci = initialFibonacci
+            .sublist(
+              0,
+              answerLength,
+            )
+            .reversed
+            .toList();
+        final coefficient = selectedAnswerIndex == -1
+            ? 1
+            : reversedFibonacci[selectedAnswerIndex];
+        coefficients[i] = coefficient;
+      } else {
+        coefficients[i] = 1;
+      }
+    }
+
+    final requestParams = {
+      'age': questions[0].selectedAnswerIndex != null
+          ? questions[0].selectedAnswerIndex! + 1
+          : 1,
+      'bill': coefficients[1],
+      'dining': coefficients[2],
+      'grocery': coefficients[3],
+      'installment': coefficients[4],
+      'mile': coefficients[5],
+      'online_shopping': coefficients[6],
+      'other': coefficients[7],
+      'point': coefficients[8],
+      'sale_cashback': coefficients[9],
+      'travel': coefficients[10],
+    };
+    return requestParams;
+  }
+
+  Future<bool> submitAnswers() async {
     final url = Uri.parse('$baseUrl/prep/createCardPost');
     try {
       final response = await http.post(
@@ -35,19 +92,7 @@ class QuestionsProvider with ChangeNotifier {
           'Content-Type': 'application/json',
         },
         body: json.encode(
-          {
-            "age": 4,
-            "bill": 8,
-            "dining": 5,
-            "grocery": 1,
-            "installment": 5,
-            "mile": 2,
-            "online_shopping": 3,
-            "other": 13,
-            "point": 3,
-            "sale_cashback": 1,
-            "travel": 2
-          },
+          requestParams,
         ),
       );
       if (response.statusCode == 200) {

@@ -1,21 +1,27 @@
+import 'package:flutter/material.dart';
 import 'package:credit_card_recommendation_system/constants/colors.dart';
 import 'package:credit_card_recommendation_system/models/question.dart';
 import 'package:credit_card_recommendation_system/utils/providers/carousel_provider.dart';
 import 'package:credit_card_recommendation_system/utils/providers/questions_provider.dart';
 import 'package:credit_card_recommendation_system/widgets/custom_change_button.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class QuestionCard extends StatelessWidget {
+class QuestionCard extends StatefulWidget {
   const QuestionCard({
-    super.key,
+    Key? key,
     required this.question,
-  });
+  }) : super(key: key);
 
   final Question question;
 
   @override
+  _QuestionCardState createState() => _QuestionCardState();
+}
+
+class _QuestionCardState extends State<QuestionCard> {
+  @override
   Widget build(BuildContext context) {
+    final questionsData = Provider.of<QuestionsProvider>(context);
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -28,7 +34,7 @@ class QuestionCard extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    question.title,
+                    widget.question.title,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontSize: 20,
                         ),
@@ -44,7 +50,7 @@ class QuestionCard extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.5,
                   child: ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: question.answers.length,
+                    itemCount: widget.question.answers.length,
                     separatorBuilder: (context, index) {
                       return const SizedBox(
                         height: 10,
@@ -59,11 +65,21 @@ class QuestionCard extends StatelessWidget {
                           ),
                         ),
                         child: ListTile(
-                          title: Text(question.answers[index]),
+                          title: Text(widget.question.answers[index]),
                           leading: Radio(
+                            toggleable: true,
+                            fillColor: MaterialStateProperty.all(kPrimaryColor),
                             value: index,
-                            groupValue: 1,
-                            onChanged: (value) {},
+                            groupValue: widget.question.selectedAnswerIndex,
+                            onChanged: (value) {
+                              if (value == null) {
+                                questionsData.updateSelectedAnswer(
+                                    widget.question.id - 1, -1);
+                              } else {
+                                questionsData.updateSelectedAnswer(
+                                    widget.question.id - 1, value as int);
+                              }
+                            },
                           ),
                         ),
                       );
@@ -80,12 +96,12 @@ class QuestionCard extends StatelessWidget {
                 Provider.of<QuestionsProvider>(context, listen: false)
                             .questions
                             .first ==
-                        question
+                        widget.question
                     ? Spacer()
                     : CustomChangeButton(
                         title: 'Önceki Soru',
                         isForward: false,
-                        question: question,
+                        question: widget.question,
                       ),
                 Spacer(),
                 Provider.of<QuestionsProvider>(context, listen: false)
@@ -94,16 +110,16 @@ class QuestionCard extends StatelessWidget {
                                 .questions
                                 .length -
                             1] ==
-                        question
+                        widget.question
                     ? CustomChangeButton(
                         title: 'Gönder',
                         isForward: true,
-                        question: question,
+                        question: widget.question,
                       )
                     : CustomChangeButton(
                         title: 'Sonraki Soru',
                         isForward: true,
-                        question: question,
+                        question: widget.question,
                       ),
               ],
             ),

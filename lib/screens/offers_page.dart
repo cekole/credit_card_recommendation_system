@@ -70,28 +70,19 @@ class OffersPage extends StatelessWidget {
               }
               final sponsoredOffers = questionsData.sponsoredOffers;
               final activeOffers = questionsData.activeOffers;
-              return Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+              return ListView(
+                children: [
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-                child: ListView(
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SponsoredOffers(sponsoredOffers: sponsoredOffers),
-                    //active offers
-                    const SizedBox(
-                      height: 20,
-                    ),
+                  SponsoredOffers(sponsoredOffers: sponsoredOffers),
+                  //active offers
+                  const SizedBox(
+                    height: 20,
+                  ),
 
-                    ActiveOffers(activeOffers: activeOffers),
-                  ],
-                ),
+                  ActiveOffers(activeOffers: activeOffers),
+                ],
               );
             },
           ),

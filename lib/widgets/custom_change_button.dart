@@ -32,7 +32,7 @@ class CustomChangeButton extends StatelessWidget {
         if (isForward) {
           if (questionsData.questions[questionsData.questions.length - 1] ==
               question) {
-            questionsData.submitAnswers({}).then((value) {
+            questionsData.submitAnswers().then((value) {
               if (value) {
                 showDialog(
                   context: context,
