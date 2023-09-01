@@ -80,7 +80,6 @@ class OffersPage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-
                   ActiveOffers(activeOffers: activeOffers),
                 ],
               );

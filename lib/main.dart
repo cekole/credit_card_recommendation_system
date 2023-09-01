@@ -3,10 +3,17 @@ import 'package:credit_card_recommendation_system/screens/home_page.dart';
 import 'package:credit_card_recommendation_system/utils/providers/carousel_provider.dart';
 import 'package:credit_card_recommendation_system/utils/providers/questions_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+    ],
+  ).then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

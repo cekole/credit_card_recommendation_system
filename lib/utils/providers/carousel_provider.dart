@@ -9,12 +9,8 @@ class CarouselProvider with ChangeNotifier {
 
   CarouselSliderController? get carouselController => _carouselController;
 
-  void changeIndex(int index) {
-    _currentIndex = index;
-    notifyListeners();
-  }
-
   void nextPage() {
+    _currentIndex++;
     _carouselController!.nextPage(
       const Duration(milliseconds: 500),
     );
@@ -22,6 +18,7 @@ class CarouselProvider with ChangeNotifier {
   }
 
   void previousPage() {
+    _currentIndex--;
     _carouselController!.previousPage(
       const Duration(milliseconds: 500),
     );

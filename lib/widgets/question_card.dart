@@ -29,9 +29,6 @@ class _QuestionCardState extends State<QuestionCard> {
           children: [
             Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
                 Center(
                   child: Text(
                     widget.question.title,
@@ -87,9 +84,6 @@ class _QuestionCardState extends State<QuestionCard> {
                   ),
                 ),
               ],
-            ),
-            SizedBox(
-              height: 20,
             ),
             Row(
               children: [
